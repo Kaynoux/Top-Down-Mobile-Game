@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09fd5078d0b68974f96dd33f651984fc, type: 3}
+  m_Name: Rifle
+  m_EditorClassIdentifier: 
+  weaponName: Rifle
+  weaponPrefab: {fileID: 134335637193991090, guid: fd87c1d62831f8346bb8affc6cc8aab7, type: 3}
+  bulletPrefab: {fileID: 5759232546040823495, guid: 6d90da80daf5d64478071851e772716a, type: 3}
+  gunEndPoint: {x: 1.53, y: 0.13, z: 0}
+  bulletDamage: 30
+  fireRate: 500
+  bulletSpeed: 20
+  reloadTime: 1.5
+  splashRadius: 0
+  magSize: 30
+  bulletType: 0

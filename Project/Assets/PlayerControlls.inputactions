@@ -1,0 +1,54 @@
+{
+    "name": "PlayerControlls",
+    "maps": [
+        {
+            "name": "Map",
+            "id": "e5c704a9-bfbc-4eee-b57e-8a6114c85359",
+            "actions": [
+                {
+                    "name": "TapAction",
+                    "type": "Button",
+                    "id": "5a33ce2b-1a1f-4516-bccf-7d706724e761",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TouchPosition",
+                    "type": "PassThrough",
+                    "id": "14e6b48e-9233-48e5-a158-0840f4782dd3",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a682c801-5d16-4605-a66c-311c28c18851",
+                    "path": "<Touchscreen>/touch1/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8736d33-634d-480f-a430-0df9464c7266",
+                    "path": "<Touchscreen>/touch1/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

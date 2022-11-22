@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09fd5078d0b68974f96dd33f651984fc, type: 3}
+  m_Name: Rocket Launcher
+  m_EditorClassIdentifier: 
+  weaponName: Rocket Launcher
+  weaponPrefab: {fileID: 2319956042438132024, guid: 9ddb05c2d911b8a49968a4a16e228527, type: 3}
+  bulletPrefab: {fileID: 9070211884547521714, guid: 77bfef4478f8cb64aaeb3602a4b7d403, type: 3}
+  gunEndPoint: {x: 1.18, y: 0.15, z: 0}
+  bulletDamage: 50
+  fireRate: 500
+  bulletSpeed: 10
+  reloadTime: 3
+  splashRadius: 2
+  magSize: 1
+  bulletType: 1
