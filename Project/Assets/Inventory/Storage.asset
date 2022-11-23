@@ -18,145 +18,21 @@ MonoBehaviour:
     invSlotList:
     - item:
         name: 
-        id: 3
-        buffs:
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-    - item:
-        name: 
-        id: 3
-        buffs:
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-    - item:
-        name: 
-        id: 3
-        buffs:
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-    - item:
-        name: 
-        id: 3
-        buffs:
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-    - item:
-        name: 
-        id: 3
-        buffs:
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
-        - attribute: 0
-          value: 31
+        id: 1
+        buffs: []
     - item:
         name: 
         id: 2
-        buffs:
-        - attribute: 0
-          value: 21
-        - attribute: 0
-          value: 21
-        - attribute: 0
-          value: 21
-        - attribute: 0
-          value: 21
-        - attribute: 0
-          value: 21
-        - attribute: 0
-          value: 21
-        - attribute: 0
-          value: 21
-        - attribute: 0
-          value: 21
-        - attribute: 0
-          value: 21
-        - attribute: 0
-          value: 21
+        buffs: []
+    - item:
+        name: 
+        id: 3
+        buffs: []
+    - item:
+        name: 
+        id: 4
+        buffs: []
+    - item:
+        name: 
+        id: 5
+        buffs: []

@@ -21,7 +21,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     
     private void Awake()
     {
-        canvas = GetComponentInParent<Canvas>();
+        canvas = GameObject.FindGameObjectWithTag("Menu Canvas").GetComponent<Canvas>();
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         itemHolder = GetComponent<ItemHolder>();
