@@ -22,8 +22,8 @@ public class ShowNumber : MonoBehaviour
 
         for (i = 0; i < ScoreNames.Length; i++)
         {
-            if (score < 900) break;
-            else score = System.MathF.Floor(score / 100f) / 10f;
+            if (score < 1000) break;
+            else score /= 1000;
         }
 
         if (isCapAt100Percent && score >= 100)
@@ -34,7 +34,7 @@ public class ShowNumber : MonoBehaviour
 
         if (score == System.MathF.Floor(score))
         {
-            result = score.ToString() + ScoreNames[i];
+            result = score.ToString("F2") + ScoreNames[i];
         }
         else result = score.ToString("F2") + ScoreNames[i];
 

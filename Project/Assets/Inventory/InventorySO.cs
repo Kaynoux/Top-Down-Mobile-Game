@@ -12,22 +12,29 @@ using UnityEditor.Rendering;
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Items/Inventory")]
 public class InventorySO : ScriptableObject
 {
+    public int addItemWithId;
     public string savePath;
     public ItemDatabaseSO itemDatabaseSO;
     public Inventory itemsContainer = new Inventory();
-   
 
+    [ContextMenu("Add Item")]
+    public void AddItemThroughEditor()
+    {
+        AddItem(itemDatabaseSO.GetItemWithId(addItemWithId));
+    }
    
     public void AddItem(Item _item)
     {
         var slot = new InventorySlot(_item.id, _item, itemDatabaseSO);
         itemsContainer.invSlotList.Add(slot);
         slot.inventorySO = this;
+        Save();
     }
 
     public void RemoveItem(Item _item)
     {
         itemsContainer.invSlotList.RemoveAll(s => s.item == _item);
+        Save();
     }
 
     

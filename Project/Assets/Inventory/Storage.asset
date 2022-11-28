@@ -12,27 +12,248 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17a2537f2c847a748867882431af06ed, type: 3}
   m_Name: Storage
   m_EditorClassIdentifier: 
+  addItemWithId: 4
   savePath: /Storage.save
   itemDatabaseSO: {fileID: 11400000, guid: b0d3e790b2b660f4a9990096b589a316, type: 2}
   itemsContainer:
     invSlotList:
     - item:
-        name: 
+        name: Common Chestplate
         id: 1
-        buffs: []
+        buffs:
+        - itemAttribute: 0
+          value: 11
+        - itemAttribute: 1
+          value: 11
+        - itemAttribute: 2
+          value: 11
+        - itemAttribute: 3
+          value: 11
+        - itemAttribute: 4
+          value: 11
+        - itemAttribute: 5
+          value: 11
+        - itemAttribute: 6
+          value: 11
+        - itemAttribute: 7
+          value: 11
+        - itemAttribute: 8
+          value: 11
+        - itemAttribute: 9
+          value: 11
     - item:
-        name: 
+        name: Uncommon Chestplate
         id: 2
-        buffs: []
+        buffs:
+        - itemAttribute: 0
+          value: 21
+        - itemAttribute: 1
+          value: 21
+        - itemAttribute: 2
+          value: 21
+        - itemAttribute: 3
+          value: 21
+        - itemAttribute: 4
+          value: 21
+        - itemAttribute: 5
+          value: 21
+        - itemAttribute: 6
+          value: 21
+        - itemAttribute: 7
+          value: 21
+        - itemAttribute: 8
+          value: 21
+        - itemAttribute: 9
+          value: 21
     - item:
-        name: 
+        name: Rare Chestplate
         id: 3
-        buffs: []
+        buffs:
+        - itemAttribute: 0
+          value: 31
+        - itemAttribute: 1
+          value: 31
+        - itemAttribute: 2
+          value: 31
+        - itemAttribute: 3
+          value: 31
+        - itemAttribute: 4
+          value: 31
+        - itemAttribute: 5
+          value: 31
+        - itemAttribute: 6
+          value: 31
+        - itemAttribute: 7
+          value: 31
+        - itemAttribute: 8
+          value: 31
+        - itemAttribute: 9
+          value: 31
     - item:
-        name: 
-        id: 4
-        buffs: []
+        name: Uncommon Chestplate
+        id: 2
+        buffs:
+        - itemAttribute: 0
+          value: 21
+        - itemAttribute: 1
+          value: 21
+        - itemAttribute: 2
+          value: 21
+        - itemAttribute: 3
+          value: 21
+        - itemAttribute: 4
+          value: 21
+        - itemAttribute: 5
+          value: 21
+        - itemAttribute: 6
+          value: 21
+        - itemAttribute: 7
+          value: 21
+        - itemAttribute: 8
+          value: 21
+        - itemAttribute: 9
+          value: 21
     - item:
-        name: 
-        id: 5
-        buffs: []
+        name: Rare Chestplate
+        id: 3
+        buffs:
+        - itemAttribute: 0
+          value: 31
+        - itemAttribute: 1
+          value: 31
+        - itemAttribute: 2
+          value: 31
+        - itemAttribute: 3
+          value: 31
+        - itemAttribute: 4
+          value: 31
+        - itemAttribute: 5
+          value: 31
+        - itemAttribute: 6
+          value: 31
+        - itemAttribute: 7
+          value: 31
+        - itemAttribute: 8
+          value: 31
+        - itemAttribute: 9
+          value: 31
+    - item:
+        name: Common Chestplate
+        id: 1
+        buffs:
+        - itemAttribute: 0
+          value: 11
+        - itemAttribute: 1
+          value: 11
+        - itemAttribute: 2
+          value: 11
+        - itemAttribute: 3
+          value: 11
+        - itemAttribute: 4
+          value: 11
+        - itemAttribute: 5
+          value: 11
+        - itemAttribute: 6
+          value: 11
+        - itemAttribute: 7
+          value: 11
+        - itemAttribute: 8
+          value: 11
+        - itemAttribute: 9
+          value: 11
+    - item:
+        name: Uncommon Chestplate
+        id: 2
+        buffs:
+        - itemAttribute: 0
+          value: 21
+        - itemAttribute: 1
+          value: 21
+        - itemAttribute: 2
+          value: 21
+        - itemAttribute: 3
+          value: 21
+        - itemAttribute: 4
+          value: 21
+        - itemAttribute: 5
+          value: 21
+        - itemAttribute: 6
+          value: 21
+        - itemAttribute: 7
+          value: 21
+        - itemAttribute: 8
+          value: 21
+        - itemAttribute: 9
+          value: 21
+    - item:
+        name: Uncommon Chestplate
+        id: 2
+        buffs:
+        - itemAttribute: 0
+          value: 21
+        - itemAttribute: 1
+          value: 21
+        - itemAttribute: 2
+          value: 21
+        - itemAttribute: 3
+          value: 21
+        - itemAttribute: 4
+          value: 21
+        - itemAttribute: 5
+          value: 21
+        - itemAttribute: 6
+          value: 21
+        - itemAttribute: 7
+          value: 21
+        - itemAttribute: 8
+          value: 21
+        - itemAttribute: 9
+          value: 21
+    - item:
+        name: Uncommon Chestplate
+        id: 2
+        buffs:
+        - itemAttribute: 0
+          value: 21
+        - itemAttribute: 1
+          value: 21
+        - itemAttribute: 2
+          value: 21
+        - itemAttribute: 3
+          value: 21
+        - itemAttribute: 4
+          value: 21
+        - itemAttribute: 5
+          value: 21
+        - itemAttribute: 6
+          value: 21
+        - itemAttribute: 7
+          value: 21
+        - itemAttribute: 8
+          value: 21
+        - itemAttribute: 9
+          value: 21
+    - item:
+        name: Rare Chestplate
+        id: 3
+        buffs:
+        - itemAttribute: 0
+          value: 31
+        - itemAttribute: 1
+          value: 31
+        - itemAttribute: 2
+          value: 31
+        - itemAttribute: 3
+          value: 31
+        - itemAttribute: 4
+          value: 31
+        - itemAttribute: 5
+          value: 31
+        - itemAttribute: 6
+          value: 31
+        - itemAttribute: 7
+          value: 31
+        - itemAttribute: 8
+          value: 31
+        - itemAttribute: 9
+          value: 31

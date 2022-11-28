@@ -15,29 +15,30 @@ MonoBehaviour:
   itemRarity: 1
   id: 2
   itemType: 1
+  itemPrice: 20000
   itemImage: {fileID: 21300000, guid: 9b317e98bb721904c8a1d7064ee62fbb, type: 3}
   itemColor: {r: 0, g: 1, b: 0, a: 1}
   data:
     name: Uncommon Chestplate
     id: 2
     buffs:
-    - attribute: 0
+    - itemAttribute: 0
       value: 21
-    - attribute: 1
+    - itemAttribute: 1
       value: 21
-    - attribute: 2
+    - itemAttribute: 2
       value: 21
-    - attribute: 3
+    - itemAttribute: 3
       value: 21
-    - attribute: 4
+    - itemAttribute: 4
       value: 21
-    - attribute: 5
+    - itemAttribute: 5
       value: 21
-    - attribute: 6
+    - itemAttribute: 6
       value: 21
-    - attribute: 7
+    - itemAttribute: 7
       value: 21
-    - attribute: 8
+    - itemAttribute: 8
       value: 21
-    - attribute: 9
+    - itemAttribute: 9
       value: 21

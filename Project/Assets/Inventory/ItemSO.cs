@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using static UnityEditor.Progress;
-using static UnityEngine.GraphicsBuffer;
+
 
 public enum ItemRarity { Common, Uncommon, Rare, Epic, Legendary }
 public enum ItemType { Helmet, Chestplate, Leggins, Boots, Ring, Pet, Empty }
@@ -24,6 +23,7 @@ public class ItemSO : ScriptableObject
 
 
     public ItemType itemType;
+    public float itemPrice;
     public Sprite itemImage;
     public Color itemColor;
 
@@ -80,7 +80,7 @@ public class Item
 [System.Serializable]
 public class ItemBuff
 {
-    public ItemAttributes attribute;
+    public ItemAttributes itemAttribute;
     public float value;
 
     public ItemBuff(float _value)

@@ -71,7 +71,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 
         //StorageManager.instance.Leave(currentItem);
         
-        InventoryManager.instance.EquipItem(currentItem);
+        
 
         currentItem.transform.SetParent(transform);
         currentItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);

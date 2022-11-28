@@ -50,12 +50,13 @@ public class StorageManager : MonoBehaviour
         var itemBackground = Instantiate(itemSlotPrefab, content);
         _itemHolder.transform.SetParent(itemBackground);
         _itemHolder.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        _itemHolder.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        _itemHolder.GetComponent<RectTransform>().localPosition = new Vector3(0,0,0);
+        _itemHolder.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0, 0);
         _itemHolder.itemSlot = itemBackground.GetComponent<ItemSlot>();
         itemBackground.GetComponent<ItemSlot>().currentItem = _itemHolder;
         itemBackground.GetComponent<ItemSlot>().itemType = _itemHolder.itemSO.itemType;
         storageSO.AddItem(_itemHolder.item);
-        storageSO.Save();
+        GlobalStats.instance.RecalulateStats();
     }
 
     public void Leave(ItemHolder _itemHolder)
@@ -65,8 +66,7 @@ public class StorageManager : MonoBehaviour
         _itemHolder.transform.SetParent(GameObject.FindGameObjectWithTag("Equipment").transform);
         Destroy(parent.gameObject);
         Debug.Log("StorageManager: Leave " + _itemHolder.gameObject.name);
-        storageSO.RemoveItem(_itemHolder.item);
-        storageSO.Save();
+        storageSO.RemoveItem(_itemHolder.item);   
         //Er removed die ersten items nicht
     }
 

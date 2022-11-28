@@ -231,7 +231,7 @@ MonoBehaviour:
   nearToWaypoint: 0.2
   maxSwitchCooldown: 1
   waypoint: {x: 0, y: 0, z: 0}
-  topSpeed: 10
+  topSpeed: 14
   accelSpeed: 20
   deccelRate: 20
   velPower: 0.9

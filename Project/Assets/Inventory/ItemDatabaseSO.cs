@@ -24,4 +24,9 @@ public class ItemDatabaseSO : ScriptableObject, ISerializationCallbackReceiver
     {
         GetItem = new Dictionary<int, ItemSO>();
     }
+
+    public Item GetItemWithId(int _id)
+    {
+        return items[_id].data;
+    }
 }

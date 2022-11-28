@@ -19,5 +19,6 @@ public class ItemHolder : MonoBehaviour
     public void Add()
     {
         storageSO.AddItem(item);
+        
     }
 }

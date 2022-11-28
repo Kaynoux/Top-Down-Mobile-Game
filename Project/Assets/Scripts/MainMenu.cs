@@ -1,10 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -12,6 +8,7 @@ public class MainMenu : MonoBehaviour
     public bool keepStorage;
     public Transform[] menus;
     public Transform worldButtons;
+    public CharacterController2d characterController2d;
     /*public Transform mainMenu;
     public Transform settingsMenu;
     public Transform shopMenu;
@@ -35,6 +32,8 @@ public class MainMenu : MonoBehaviour
 
         ChangeMenu(0);
         ToggleStats();
+        GlobalStats.instance.CoinsChanged();
+        GlobalStats.instance.GemsChanged();
     }
 
     
@@ -76,12 +75,14 @@ public class MainMenu : MonoBehaviour
         if (index != 0)
         {
             worldButtons.gameObject.SetActive(false);
+            characterController2d.enabled = false;
             
         }
         else
         {
             
             worldButtons.gameObject.SetActive(true);
+            characterController2d.enabled = true;
         }
 
         if(index == 3 && keepShop == false)

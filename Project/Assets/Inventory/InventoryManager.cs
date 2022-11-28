@@ -5,13 +5,13 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
-{
+{/*
     public static InventoryManager instance;
 
     // fill in inspector
     /*public static List<Transform> allItems = new List<Transform>();
     public List<Transform> ownedItems = new List<Transform>();
-    public List<Transform> equippedItems = new List<Transform>();*/
+    public List<Transform> equippedItems = new List<Transform>();
 
     
     public ItemHolder emptyStats;
@@ -58,7 +58,7 @@ public class InventoryManager : MonoBehaviour
     {
         Debug.Log("1" + currentHelmet.itemHealth);
         Debug.Log("2" + currentChestplate.itemHealth);
-    }*/
+    }
 
 
 
@@ -122,9 +122,9 @@ public class InventoryManager : MonoBehaviour
         totalSkill += _ItemHolder.itemSkill;
         totalCritical += _ItemHolder.itemCritical;
         totalSpeed += _ItemHolder.itemSpeed;
-        totalLuck += _ItemHolder.itemLuck;*/
+        totalLuck += _ItemHolder.itemLuck;
 
-        Debug.Log(_ItemHolder.itemSO.itemType.ToString());
+       
         if (_ItemHolder.itemSO.itemType == ItemType.Helmet)
         {
             currentHelmet = _ItemHolder;
@@ -213,5 +213,5 @@ public class InventoryManager : MonoBehaviour
 
     }
 
-   
+ */  
 }

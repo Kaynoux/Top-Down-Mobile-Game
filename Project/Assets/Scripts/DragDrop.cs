@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
@@ -21,7 +18,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     
     private void Awake()
     {
-        canvas = GameObject.FindGameObjectWithTag("Menu Canvas").GetComponent<Canvas>();
+        
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         itemHolder = GetComponent<ItemHolder>();
@@ -31,8 +28,14 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
   
     }
 
+    private void Start()
+    {
+        canvas = GameObject.FindGameObjectWithTag("Menu Canvas").GetComponent<Canvas>();
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log("Begin Drag");
         itemHolder.itemSlot.DefaultColor();
         beforePos = rectTransform.anchoredPosition;
         canvasGroup.blocksRaycasts = false;

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17a2537f2c847a748867882431af06ed, type: 3}
   m_Name: CurrentItems
   m_EditorClassIdentifier: 
+  addItemWithId: 2
   savePath: /CurrentItems.save
   itemDatabaseSO: {fileID: 11400000, guid: b0d3e790b2b660f4a9990096b589a316, type: 2}
   itemsContainer:
