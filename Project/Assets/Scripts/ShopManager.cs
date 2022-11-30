@@ -38,8 +38,6 @@ public class ShopManager : MonoBehaviour
             var newItem = Instantiate(shopPrefab, content);
 
             ItemHolder itemHolder = newItem.GetComponent<ItemHolder>();
-
-            list[0].inventorySO = shopSO;
             itemHolder.itemSO = list[0].GetItemObject();
             itemHolder.image.sprite = itemHolder.itemSO.itemImage;
             itemHolder.item = list[0].item;
@@ -52,7 +50,7 @@ public class ShopManager : MonoBehaviour
             itemHolder.gameObject.GetComponent<BuyItem>().UpdateText(itemHolder.itemSO.name, itemHolder.itemSO.itemPrice, itemHolder.itemSO.itemColor);
             shopSO.AddItem(itemHolder.item);
             shopSO.Save();
-            GlobalStats.instance.RecalulateStats();
+            
 
 
         }

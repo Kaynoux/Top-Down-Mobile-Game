@@ -82,11 +82,12 @@ public class GlobalStats : MonoBehaviour
         {
             for (int ii = 0; ii < slotList[i].item.buffs.Length; ii++)
             {
+                Debug.Log(ReturnAttribute(slotList[i].item.buffs[ii].itemAttribute));
                 ReturnAttribute(slotList[i].item.buffs[ii].itemAttribute).totalValue += slotList[i].item.buffs[ii].value;
             }
         }
-
-        Debug.Log("Global Stats: Recalulate Stats");
+        RedrawStats();
+        
     }
 
     public void RedrawStats()
@@ -127,6 +128,11 @@ public class GlobalStats : MonoBehaviour
             
         }
         return null;
+    }
+
+    public void SaveCurrentItemsSO()
+    {
+        currentItems.Save();
     }
 
 

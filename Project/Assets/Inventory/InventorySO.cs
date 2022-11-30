@@ -25,9 +25,8 @@ public class InventorySO : ScriptableObject
    
     public void AddItem(Item _item)
     {
-        var slot = new InventorySlot(_item.id, _item, itemDatabaseSO);
+        var slot = new InventorySlot(_item.id, _item);
         itemsContainer.invSlotList.Add(slot);
-        slot.inventorySO = this;
         Save();
     }
 
@@ -88,17 +87,18 @@ public class Inventory
 public class InventorySlot
 {
     public Item item;
-    [System.NonSerialized] public InventorySO inventorySO;
    
     
-    public InventorySlot(int _id, Item _item, ItemDatabaseSO _itemDatabaseSO)
+    public InventorySlot(int _id, Item _item)
     {
         item = _item;   
     }
 
     public ItemSO GetItemObject()
     {
-        return item.id >= 0 ? inventorySO.itemDatabaseSO.items[item.id] : null;
+        Debug.Log(item.name);
+        return item.id >= 0 ? StorageManager.instance.itemDatabaseSO.items[item.id] : null;
+        
     }
 }
 

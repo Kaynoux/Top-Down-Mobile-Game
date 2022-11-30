@@ -10,12 +10,14 @@ public class StorageManager : MonoBehaviour
 
     
     public Transform content;
+    public Transform itemSlots;
     public Transform itemSlotPrefab;
     public Transform itemLoadPrefab;
   
     public InventorySO storageSO;
     public InventorySO currentItemsSO;
-
+    public ItemDatabaseSO itemDatabaseSO;
+    private List<Transform> listOfChildren = new List<Transform>();
     private void Awake()
     {
         if (instance == null)
@@ -80,7 +82,6 @@ public class StorageManager : MonoBehaviour
 
         storageSO.Load();
         var list = storageSO.itemsContainer.invSlotList;
-        int count = list.Count;
 
         for (int i = 0; i < list.Count; i++)
         {
@@ -88,7 +89,7 @@ public class StorageManager : MonoBehaviour
             
             ItemHolder itemHolder = newItem.GetComponent<ItemHolder>();
 
-            list[0].inventorySO = storageSO;
+            
             itemHolder.itemSO = list[0].GetItemObject();
             itemHolder.image.sprite = itemHolder.itemSO.itemImage;
             itemHolder.item = list[0].item;
@@ -97,24 +98,67 @@ public class StorageManager : MonoBehaviour
             
             
         }
-        /*foreach (InventorySlot i in list.Reverse<InventorySlot>())
+
+        currentItemsSO.Load();
+        var currentList = currentItemsSO.itemsContainer.invSlotList;
+        var typeList = new List<ItemType> { ItemType.Helmet, ItemType.Chestplate, ItemType.Leggins, ItemType.Boots, ItemType.Ring, ItemType.Pet };
+        GetChildRecursive(itemSlots);
+        
+        
+
+        for (int i = 0; i < currentList.Count; i++)
         {
-            var newItem = Instantiate(itemLoadPrefab);
+            for (int ii = 0; ii < typeList.Count; ii++)
+            {
+                if (itemDatabaseSO.GetItem[currentList[i].item.id].itemType == typeList[ii] )
+                {
+                    foreach (Transform child in listOfChildren[ii])
+                    {
+                        GameObject.Destroy(child.gameObject);
 
-            ItemHolder itemHolder = newItem.GetComponent<ItemHolder>();
+                    }
+                    var newItem = Instantiate(itemLoadPrefab, listOfChildren[ii]);
+                    ItemHolder itemHolder = newItem.GetComponent<ItemHolder>();
+                    itemHolder.itemSO = currentList[i].GetItemObject();
+                    itemHolder.image.sprite = itemHolder.itemSO.itemImage;
+                    itemHolder.item = currentList[i].item;
+                    itemHolder.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0, 0);
+                    itemHolder.itemSlot = listOfChildren[ii].GetComponent<ItemSlot>();
+                }
+            }
+            
+        }
+        
 
-            i.inventorySO = storageSO;
-            itemHolder.itemSO = i.GetItemObject();
-            itemHolder.image.sprite = itemHolder.itemSO.itemImage;
-            itemHolder.item = i.item;
-            list.Remove(i);
-            Store(itemHolder, true);
-        }*/
 
 
 
 
-       
+
+
+
+
+
+    }
+
+    private void GetChildRecursive(Transform obj)
+    {
+        if (listOfChildren.Count != 0)
+        {
+            listOfChildren.Clear();
+        }
+        
+        if (null == obj)
+            return;
+
+        foreach (Transform child in obj.transform)
+        {
+            if (null == child)
+                continue;
+            //child.gameobject contains the current child you can do whatever you want like add it to an array
+            listOfChildren.Add(child);
+            //GetChildRecursive(child);
+        }
     }
 
 

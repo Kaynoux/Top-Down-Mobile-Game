@@ -82,7 +82,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                 
                 //itemStats.itemSlot.Unequip();
                 StorageManager.instance.Store(itemHolder);
-
+                GlobalStats.instance.RecalulateStats();
+                GlobalStats.instance.SaveCurrentItemsSO();
                 isSave = true;
 
                 break;
@@ -97,6 +98,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                     itemSlot.Equip(itemHolder);
                     isSave = true;
                     itemHolder.itemSlot.RecolorSlot();
+                    GlobalStats.instance.RecalulateStats();
+                    GlobalStats.instance.SaveCurrentItemsSO();
                     break;
                     
                 } 
@@ -112,6 +115,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             if (itemHolder.itemSlot == null)
             {
                 StorageManager.instance.Store(itemHolder);
+                GlobalStats.instance.SaveCurrentItemsSO();
             }
             else
             {
