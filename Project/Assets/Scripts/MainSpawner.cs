@@ -8,14 +8,30 @@ using CodeMonkey.Utils;
 public class MainSpawner : MonoBehaviour
 {
     public Camera mainCamera;
-    public List<Transform> enemys = new List<Transform>();
+    public List<Transform> enemyTypes = new List<Transform>();
     public Transform enemyHolder;
     public float minDistance;
     public float maxDistance;
     public float difficulty;
     public float baseSpawnTime;
+    public List<Transform> enemys = new List<Transform>();
 
     private float currentCooldown;
+
+    public static MainSpawner instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
+    }
 
     private void Update()
     {
@@ -48,7 +64,7 @@ public class MainSpawner : MonoBehaviour
             var distance = Random.Range(minDistance, maxDistance);
             Vector3 enemyPosition = new Vector3((direction.x * distance), (direction.y * distance), 0) + mainCamera.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2));
             currentCooldown = baseSpawnTime / difficulty;
-            SpawnEnemy(enemys[0], enemyPosition);
+            SpawnEnemy(enemyTypes[0], enemyPosition);
 
         }
         else
@@ -59,7 +75,8 @@ public class MainSpawner : MonoBehaviour
 
     private void SpawnEnemy(Transform _enemyTrans, Vector3 _enemyPosition)
     {
-        Instantiate(_enemyTrans, _enemyPosition, Quaternion.identity, enemyHolder);
+        var newEnemy = Instantiate(_enemyTrans, _enemyPosition, Quaternion.identity, enemyHolder);
+        enemys.Add(newEnemy);
     }
     
 }

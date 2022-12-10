@@ -37,7 +37,7 @@ public class WeaponManager : MonoBehaviour
     public Slider reloadSlider;
     private List<float> reloadSliderValue;
     public Image reloadSliderImage;
-    public Transform sprite;
+    public Transform rotator;
     public Transform emptyPrefab;
 
     private float verticalAim;
@@ -94,7 +94,7 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
-        HandleAiming();
+        
         HandleShooting();
         //Debug.Log(bulletSpeed);
         if(isReloading == true)
@@ -220,13 +220,13 @@ public class WeaponManager : MonoBehaviour
         {
             //Debug.Log("1");
             weaponArm.eulerAngles = new Vector3(-180, 0, -angle);
-            sprite.localEulerAngles = new Vector3(0, -180, 0);
+            rotator.localEulerAngles = new Vector3(0, -180, 0);
         }
         else
         {
             //Debug.Log("2");
             weaponArm.eulerAngles = new Vector3(0, 0, angle);
-            sprite.localEulerAngles = new Vector3(0, 0, 0);
+            rotator.localEulerAngles = new Vector3(0, 0, 0);
             //weaponArm.eulerAngles = new Vector3(0, 0, angle);
         }
 
@@ -235,6 +235,59 @@ public class WeaponManager : MonoBehaviour
 
 
 
+    }
+
+    private void HandleAutoAiming()
+    {
+
+        var closestEnemy = GetClosestEnemy();
+
+        if (closestEnemy == null)
+        {
+            return;
+        }
+
+        aimDirection = closestEnemy.position - currentEndPoint.position;
+        angle = -(Mathf.Atan2(aimDirection.normalized.x, aimDirection.normalized.y) * Mathf.Rad2Deg) + 90;
+
+        if (aimDirection.normalized.x < 0)
+        {
+            //Debug.Log("1");
+            weaponArm.eulerAngles = new Vector3(-180, 0, -angle);
+            rotator.localEulerAngles = new Vector3(0, -180, 0);
+        }
+        else
+        {
+            //Debug.Log("2");
+            weaponArm.eulerAngles = new Vector3(0, 0, angle);
+            rotator.localEulerAngles = new Vector3(0, 0, 0);
+            //weaponArm.eulerAngles = new Vector3(0, 0, angle);
+        }
+
+    }
+
+    private Transform GetClosestEnemy()
+    {
+        var enemies = MainSpawner.instance.enemys;
+        if (enemies.Count == 0)
+        {
+            return null;
+        }
+        Transform bestTarget = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (Transform potentialTarget in enemies)
+        {
+            Vector3 directionToTarget = potentialTarget.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = potentialTarget;
+            }
+        }
+
+        return bestTarget;
     }
 
     private void HandleShooting()
@@ -254,7 +307,7 @@ public class WeaponManager : MonoBehaviour
 
         else if (currentCooldown <= 0)
         {
-            if ((joystickAim.Horizontal > 0.35 || joystickAim.Vertical > 0.35 || joystickAim.Horizontal < -0.35 || joystickAim.Vertical < -0.35 && joystickInput == true ) || (keyboardInput == true && Input.GetMouseButton(0)))
+            /*if ((joystickAim.Horizontal > 0.35 || joystickAim.Vertical > 0.35 || joystickAim.Horizontal < -0.35 || joystickAim.Vertical < -0.35 && joystickInput == true ) || (keyboardInput == true && Input.GetMouseButton(0)))
             {
                 OnShoot?.Invoke(this, new OnShootEventArgs
                 {
@@ -272,8 +325,25 @@ public class WeaponManager : MonoBehaviour
                 currentMagSizeList[currentWeaponIndex] --;
                 reloadSlider.value--;
                 currentAnimator.SetTrigger("Shoot");
-            }
-            
+            }*/
+            HandleAutoAiming();
+            OnShoot?.Invoke(this, new OnShootEventArgs
+            {
+                gunEndPointPosition = currentEndPoint.position,
+                aimDirection = aimDirection,
+                bulletPrefab = bulletPrefab,
+                bulletSpeed = bulletSpeed,
+                bulletDamage = bulletDamage,
+                bulletOwner = transform,
+                bulletType = currentBulletType,
+                splashRadius = splashRadius,
+
+            }); ;
+            currentCooldown = 1 / (fireRate / 60);
+            currentMagSizeList[currentWeaponIndex]--;
+            reloadSlider.value--;
+            currentAnimator.SetTrigger("Shoot");
+
         }
         else
         {

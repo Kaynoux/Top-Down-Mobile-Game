@@ -14,20 +14,20 @@ public class PetMove : MonoBehaviour
     public Vector3 waypoint;
 
     public float topSpeed;
-    public float accelSpeed;
-    public float deccelRate;
+
     public float velPower;
+    public float farAwayModifier;
     public Rigidbody2D rb;
     public Transform sprite;
     
-    private float beginX;
+    /*private float beginX;
     private float beginY;
     private float speedDifX;
     private float speedDifY;
     private float accelRateX;
     private float accelRateY;
     private float moveX;
-    private float moveY;
+    private float moveY;*/
 
     private Vector3 direction;
 
@@ -88,7 +88,7 @@ public class PetMove : MonoBehaviour
             }
             else
             {
-                direction = (waypoint - transform.position).normalized * (topSpeed*3);
+                direction = (waypoint - transform.position).normalized * (topSpeed * farAwayModifier) ;
             }
 
             

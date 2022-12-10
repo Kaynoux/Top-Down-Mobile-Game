@@ -1,7 +1,7 @@
-using Mono.Cecil;
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GlobalStats : MonoBehaviour
 {
@@ -29,25 +29,20 @@ public class GlobalStats : MonoBehaviour
     public float totalLuck;*/
 
     public Attribute[] attributes;
-    public float totalCoins;
-    public float totalGems;
+
+
+    public float gainPerHealthLevel;
+    public float gainPerStrengthLevel;
+    
 
     public InventorySO currentItems;
 
-    public ShowNumber totalHealthText;
-    public ShowNumber totalRegenText;
-    public ShowNumber totalDefenseText;
-    public ShowNumber totalDodgeText;
-    public ShowNumber totalStrengthText;
-    public ShowNumber totalAttackText;
-    public ShowNumber totalSkillText;
-    public ShowNumber totalCriticalText;
-    public ShowNumber totalSpeedText;
-    public ShowNumber totalLuckText;
+    
 
-    public ShowNumber coinsText;
-    public ShowNumber gemsText;
-
+    
+    public SaveDataSO saveDataSO;
+    public static event EventHandler OnStatsChange;
+   
 
 
 
@@ -65,56 +60,69 @@ public class GlobalStats : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
-
+        
+        saveDataSO.Load();
+        QualitySettings.SetQualityLevel(saveDataSO.QualityLevelIndex);
 
     }
 
-    
+    private void Start()
+    {
+        StartCoroutine(LateStart());
+    }
+
+    IEnumerator LateStart()
+    {
+        yield return new WaitForFixedUpdate();
+        RecalulateStats();
+    }
+
+
+
     public void RecalulateStats()
     {
         for (int i = 0; i < attributes.Length; i++)
         {
+            attributes[i].baseValue = attributes[i].startValue;
             attributes[i].totalValue = attributes[i].baseValue;
         }
+
+        attributes[0].totalValue += gainPerHealthLevel * saveDataSO.CurrentHealthLevel;
+        attributes[4].totalValue += gainPerStrengthLevel * saveDataSO.CurrentStrengthLevel ;
+       
 
         var slotList = currentItems.itemsContainer.invSlotList;
         for (int i = 0; i < slotList.Count; i++)
         {
             for (int ii = 0; ii < slotList[i].item.buffs.Length; ii++)
             {
-                Debug.Log(ReturnAttribute(slotList[i].item.buffs[ii].itemAttribute));
+                //Debug.Log(ReturnAttribute(slotList[i].item.buffs[ii].itemAttribute));
                 ReturnAttribute(slotList[i].item.buffs[ii].itemAttribute).totalValue += slotList[i].item.buffs[ii].value;
             }
         }
-        RedrawStats();
+
+        OnStatsChange?.Invoke(this, EventArgs.Empty);
+        Debug.Log("Stats Recalulated");
+        
         
     }
 
-    public void RedrawStats()
+    
+
+    /*public void CoinsChanged()
     {
+        if (MainMenu.instance.coinsText != null)
+        {
+            MainMenu.instance.coinsText.ScoreShow(saveDataSO.TotalCoins);
+        }
 
-        totalHealthText.ScoreShow(attributes[0].totalValue);
-        totalRegenText.ScoreShow(attributes[1].totalValue);
-        totalDefenseText.ScoreShow(attributes[2].totalValue);
-        totalDodgeText.ScoreShow(attributes[3].totalValue);
-        totalStrengthText.ScoreShow(attributes[4].totalValue);
-        totalAttackText.ScoreShow(attributes[5].totalValue);
-        totalSkillText.ScoreShow(attributes[6].totalValue);
-        totalCriticalText.ScoreShow(attributes[7].totalValue);
-        totalSpeedText.ScoreShow(attributes[8].totalValue);
-        totalLuckText.ScoreShow(attributes[9].totalValue);
-
-    }
-
-    public void CoinsChanged()
-    {
-        coinsText.ScoreShow(totalCoins);
+        
     }
 
     public void GemsChanged()
     {
-        gemsText.ScoreShow(totalGems);
-    }
+        
+    }*/
 
     public Attribute ReturnAttribute(ItemAttributes _itemAttribute)
     {
@@ -135,14 +143,39 @@ public class GlobalStats : MonoBehaviour
         currentItems.Save();
     }
 
+    public void LoadScene(string sceneName)
+    {
+        StartCoroutine(LoadYourAsyncScene(sceneName));
+
+    }
+
+    IEnumerator LoadYourAsyncScene(string sceneName)
+    {
+        // The Application loads the Scene in the background as the current Scene runs.
+        // This is particularly good for creating loading screens.
+        // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
+        // a sceneBuildIndex of 1 as shown in Build Settings.
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+
 
 }
+
+
 
 [System.Serializable]
 public class Attribute
 {
     
     public ItemAttributes itemAttribute;
+    public float startValue;
     public float baseValue;
     public float totalValue;
 

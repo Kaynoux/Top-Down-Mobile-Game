@@ -7,6 +7,7 @@ public class ShowNumber : MonoBehaviour
     private TextMeshProUGUI textMeshPro;
     public bool isPercent;
     public bool isCapAt100Percent;
+    public bool isInt;
     
 
     private void Awake()
@@ -14,6 +15,7 @@ public class ShowNumber : MonoBehaviour
         textMeshPro = GetComponent<TextMeshProUGUI>();
             
     }
+
     public void ScoreShow(float score)
     {
         string result;
@@ -30,23 +32,35 @@ public class ShowNumber : MonoBehaviour
         {
             score = 100;
         }
-            
 
-        if (score == System.MathF.Floor(score))
+        if (isInt)
         {
-            result = score.ToString("F2") + ScoreNames[i];
+            result = ((int)score).ToString() + ScoreNames[i];
         }
-        else result = score.ToString("F2") + ScoreNames[i];
+        else
+        {
+            if (score == System.MathF.Floor(score))
+            {
+
+                result = score.ToString("F2") + ScoreNames[i];
+            }
+            else result = score.ToString("F2") + ScoreNames[i];
+        }
+        
 
         if (isPercent)
         {
             result = result + "%";
         }
 
+        
+
         if (textMeshPro != null)
         {
             textMeshPro.text = result;
         }
+
+        //Debug.Log("redraw");
         
     }
 }

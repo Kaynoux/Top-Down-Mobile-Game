@@ -6,8 +6,8 @@ public class ShopManager : MonoBehaviour
 {
     public static ShopManager instance;
     public InventorySO shopSO;
-    public Transform content;
     public Transform shopPrefab;
+
     private void Awake()
     {
         if (instance == null)
@@ -24,7 +24,7 @@ public class ShopManager : MonoBehaviour
     [ContextMenu("Load")]
     public void Load()
     {
-        foreach (Transform child in content)
+        foreach (Transform child in MainMenu.instance.content)
         {
             GameObject.Destroy(child.gameObject);
         }
@@ -35,7 +35,7 @@ public class ShopManager : MonoBehaviour
 
         for (int i = 0; i < list.Count; i++)
         {
-            var newItem = Instantiate(shopPrefab, content);
+            var newItem = Instantiate(shopPrefab, MainMenu.instance.content);
 
             ItemHolder itemHolder = newItem.GetComponent<ItemHolder>();
             itemHolder.itemSO = list[0].GetItemObject();

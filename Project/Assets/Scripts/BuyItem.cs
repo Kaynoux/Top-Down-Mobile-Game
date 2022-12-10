@@ -15,15 +15,15 @@ public class BuyItem : MonoBehaviour
     public Image itemSlotImage;
     public Image itemBoarderImage;
     public Image itemPriceBoarderImage;
-    
+    public SaveDataSO saveDataSO;
     public void TryBuy()
     {
-        if (isCoinPrice && price <= GlobalStats.instance.totalCoins)
+        if (isCoinPrice && price <= saveDataSO.TotalCoins)
         {
             Debug.Log("Bought" + gameObject.name);
             itemHolder.Add();
-            GlobalStats.instance.totalCoins -= price;
-            GlobalStats.instance.CoinsChanged();
+            GlobalStats.instance.saveDataSO.TotalCoins -= price;
+            
         }
 
         

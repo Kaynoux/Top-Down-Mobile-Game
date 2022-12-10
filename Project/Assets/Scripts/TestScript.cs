@@ -16,5 +16,12 @@ public class TestScript : MonoBehaviour
             inventorySO.Load();
         }
 
+        if (Input.GetKey(KeyCode.Q))
+        {
+            Debug.Log(QualitySettings.GetQualityLevel());
+        }
+
     }
+
+    
 }

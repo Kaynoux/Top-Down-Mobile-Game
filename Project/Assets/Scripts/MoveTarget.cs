@@ -76,7 +76,7 @@ public class MoveTarget : MonoBehaviour
         if (distance < maxDistanceToAttack && currentAttackCooldown <= 0)
         {
             rb.AddForce(direction * attackForce);
-            player.GetComponent<Target>().Damage(damage);
+            player.GetComponent<PlayerTarget>().Damage(damage);
             currentAttackCooldown = attackCooldown;
 
         }

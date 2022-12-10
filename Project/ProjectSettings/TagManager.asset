@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Storage
   - Equipment
+  - Menu Canvas
+  - Content
   layers:
   - Default
   - TransparentFX

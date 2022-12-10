@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+
 
 public class StorageManager : MonoBehaviour
 {
     public static StorageManager instance;
 
     
-    public Transform content;
-    public Transform itemSlots;
+ 
     public Transform itemSlotPrefab;
     public Transform itemLoadPrefab;
   
@@ -32,6 +32,10 @@ public class StorageManager : MonoBehaviour
 
     }
 
+   
+
+    
+
     public void Store(ItemHolder _itemHolder, bool isNew = false)
     {
         //if (_itemHolder.itemSlot.isStorage)
@@ -45,11 +49,12 @@ public class StorageManager : MonoBehaviour
             
             _itemHolder.itemSlot.currentItem = null;
             currentItemsSO.RemoveItem(_itemHolder.item);
-            
+            GlobalStats.instance.RecalulateStats();
+
         }
         
-        Debug.Log("Storage: Store " + _itemHolder.gameObject.name);
-        var itemBackground = Instantiate(itemSlotPrefab, content);
+        //Debug.Log("Storage: Store " + _itemHolder.gameObject.name);
+        var itemBackground = Instantiate(itemSlotPrefab, MainMenu.instance.content);
         _itemHolder.transform.SetParent(itemBackground);
         _itemHolder.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
         _itemHolder.GetComponent<RectTransform>().localPosition = new Vector3(0,0,0);
@@ -58,7 +63,7 @@ public class StorageManager : MonoBehaviour
         itemBackground.GetComponent<ItemSlot>().currentItem = _itemHolder;
         itemBackground.GetComponent<ItemSlot>().itemType = _itemHolder.itemSO.itemType;
         storageSO.AddItem(_itemHolder.item);
-        GlobalStats.instance.RecalulateStats();
+        
     }
 
     public void Leave(ItemHolder _itemHolder)
@@ -75,7 +80,7 @@ public class StorageManager : MonoBehaviour
     [ContextMenu("Load")]
     public void Load()
     {
-        foreach (Transform child in content)
+        foreach (Transform child in MainMenu.instance.content)
         {
             GameObject.Destroy(child.gameObject);
         }
@@ -102,7 +107,7 @@ public class StorageManager : MonoBehaviour
         currentItemsSO.Load();
         var currentList = currentItemsSO.itemsContainer.invSlotList;
         var typeList = new List<ItemType> { ItemType.Helmet, ItemType.Chestplate, ItemType.Leggins, ItemType.Boots, ItemType.Ring, ItemType.Pet };
-        GetChildRecursive(itemSlots);
+        GetChildRecursive(MainMenu.instance.itemSlots);
         
         
 
@@ -123,7 +128,11 @@ public class StorageManager : MonoBehaviour
                     itemHolder.image.sprite = itemHolder.itemSO.itemImage;
                     itemHolder.item = currentList[i].item;
                     itemHolder.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0, 0);
-                    itemHolder.itemSlot = listOfChildren[ii].GetComponent<ItemSlot>();
+
+                    var itemSlot = listOfChildren[ii].GetComponent<ItemSlot>();
+                    itemHolder.itemSlot = itemSlot;
+                    itemSlot.currentItem = itemHolder;
+                    itemSlot.RecolorSlot();
                 }
             }
             

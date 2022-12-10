@@ -96,7 +96,7 @@ public class InventorySlot
 
     public ItemSO GetItemObject()
     {
-        Debug.Log(item.name);
+        //Debug.Log(item.name);
         return item.id >= 0 ? StorageManager.instance.itemDatabaseSO.items[item.id] : null;
         
     }
