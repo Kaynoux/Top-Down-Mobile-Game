@@ -28,7 +28,7 @@ public class GlobalStats : MonoBehaviour
     public float totalSpeed;
     public float totalLuck;*/
 
-    public Attribute[] attributes;
+    [SerializeField] private Attribute[] attributes;
 
 
     public float gainPerHealthLevel;
@@ -56,7 +56,8 @@ public class GlobalStats : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(instance.gameObject);
+            instance = this;
         }
 
         DontDestroyOnLoad(this.gameObject);
@@ -107,7 +108,49 @@ public class GlobalStats : MonoBehaviour
         
     }
 
-    
+    public float Health
+    {
+        get { return attributes[0].totalValue; }
+    }
+    public float Regen
+    {
+        get { return attributes[1].totalValue; }
+    }
+    public float Defense
+    {
+        get { return attributes[2].totalValue; }
+    }
+    public float Dogde
+    {
+        get { return attributes[3].totalValue; }
+    }
+    public float Strength
+    {
+        get { return attributes[4].totalValue; }
+    }
+    public float Attack
+    {
+        get { return attributes[5].totalValue; }
+    }
+    public float Skill
+    {
+        get { return attributes[6].totalValue; }
+    }
+    public float Critical
+    {
+        get { return attributes[7].totalValue; }
+    }
+    public float Speed
+    {
+        get { return attributes[8].totalValue; }
+    }
+
+    public float Luck
+    {
+        get { return attributes[9].totalValue; }
+    }
+
+
 
     /*public void CoinsChanged()
     {

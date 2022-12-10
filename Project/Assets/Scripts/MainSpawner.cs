@@ -7,6 +7,7 @@ using CodeMonkey.Utils;
 
 public class MainSpawner : MonoBehaviour
 {
+    public bool isPauseSpawning;
     public Camera mainCamera;
     public List<Transform> enemyTypes = new List<Transform>();
     public Transform enemyHolder;
@@ -50,13 +51,16 @@ public class MainSpawner : MonoBehaviour
         Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPosition);
         return worldPosition;*/
 
-        
+
         /*var upperLeft = mainCamera.ScreenToWorldPoint(new Vector2(0, Screen.height));
         var upperRight = mainCamera.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
         var lowerLeft = mainCamera.ScreenToWorldPoint(new Vector2(0, 0));
         var lowerRight = mainCamera.ScreenToWorldPoint(new Vector2(Screen.width, 0));*/
 
-        
+        if (isPauseSpawning)
+        {
+            return;
+        }
 
         if (currentCooldown < 0)
         {

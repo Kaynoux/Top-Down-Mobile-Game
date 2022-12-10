@@ -48,7 +48,14 @@ public class Rocket: MonoBehaviour
                 var damagePercent = Mathf.InverseLerp(splashRadius, 0, distance);
                 //linerar damage Dropoff in damage circle
 
-                target.Damage(damagePercent * bulletDamage);
+                if (GlobalStats.instance.Critical >= Random.Range(0, 100))
+                {
+                    target.Damage(2 * bulletDamage * damagePercent, true);
+                }
+                else
+                {
+                    target.Damage(bulletDamage * damagePercent, false);
+                }
             }
         }
         Destroy(gameObject);

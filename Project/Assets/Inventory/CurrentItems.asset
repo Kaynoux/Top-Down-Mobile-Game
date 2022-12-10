@@ -16,28 +16,4 @@ MonoBehaviour:
   savePath: /CurrentItems.save
   itemDatabaseSO: {fileID: 11400000, guid: b0d3e790b2b660f4a9990096b589a316, type: 2}
   itemsContainer:
-    invSlotList:
-    - item:
-        name: Uncommon Chestplate
-        id: 2
-        buffs:
-        - itemAttribute: 0
-          value: 21
-        - itemAttribute: 1
-          value: 21
-        - itemAttribute: 2
-          value: 21
-        - itemAttribute: 3
-          value: 21
-        - itemAttribute: 4
-          value: 21
-        - itemAttribute: 5
-          value: 21
-        - itemAttribute: 6
-          value: 21
-        - itemAttribute: 7
-          value: 21
-        - itemAttribute: 8
-          value: 21
-        - itemAttribute: 9
-          value: 21
+    invSlotList: []

@@ -84,12 +84,12 @@ public class CharacterController2d : MonoBehaviour
         if(!disableHorMove)
         {
             
-            rb.AddForce(new Vector2(moveX, moveY));
+            rb.AddForce(new Vector2(moveX, moveY) * GlobalStats.instance.Speed / 100);
 
         }
         else
         {
-            rb.AddForce(new Vector2(moveX, 0));
+            rb.AddForce(new Vector2(moveX, 0) * GlobalStats.instance.Speed / 100);
         }
        
         

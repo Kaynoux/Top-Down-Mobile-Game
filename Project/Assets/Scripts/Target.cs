@@ -10,14 +10,16 @@ public class Target : MonoBehaviour
     public Transform helthBarSlider;
     public SpriteRenderer glowSprite;
     public bool visibleHealthBar;
+    public Transform pfDamagePopup;
 
     private void Start()
     {
         currentHealth = maxHealth;
     }
-    public void Damage(float damage)
+    public void Damage(float _damage, bool _isCritical)
     {
-        currentHealth -= damage;
+        DamagePopup.Create(transform.position, _damage, _isCritical);
+        currentHealth -= _damage;
         if(currentHealth <= 0)
         {
             Destroy(gameObject);
@@ -31,8 +33,8 @@ public class Target : MonoBehaviour
             }
            
             DamageAnimation();
-
             Invoke("DefaultAnimation", .1f);
+           
         }
         
         

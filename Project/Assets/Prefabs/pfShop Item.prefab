@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 866238405}
   - component: {fileID: 866238406}
   m_Layer: 5
-  m_Name: Shop Item
+  m_Name: pfShop Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

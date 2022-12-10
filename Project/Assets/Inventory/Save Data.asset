@@ -16,8 +16,8 @@ MonoBehaviour:
   saveClass:
     totalCoins: 10000
     totalGems: 101000
-    currentHealthLevel: 57
-    currentStrengthLevel: 42
+    currentHealthLevel: 0
+    currentStrengthLevel: 0
     musicVolume: -40
     soundVolume: -40
-    qualityLevelIndex: 1
+    qualityLevelIndex: 2

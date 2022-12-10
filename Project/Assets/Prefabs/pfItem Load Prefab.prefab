@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9184328180411702067}
   - component: {fileID: 9184328180411702071}
   m_Layer: 5
-  m_Name: Item Load Prefab
+  m_Name: pfItem Load Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

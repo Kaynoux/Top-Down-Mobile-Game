@@ -148,29 +148,29 @@ public class MainMenu : MonoBehaviour
     {
         if (currentMenuIndex == 4)
         {
-            totalHealthText.ScoreShow(GlobalStats.instance.attributes[0].totalValue);
-            totalRegenText.ScoreShow(GlobalStats.instance.attributes[1].totalValue);
-            totalDefenseText.ScoreShow(GlobalStats.instance.attributes[2].totalValue);
-            totalDodgeText.ScoreShow(GlobalStats.instance.attributes[3].totalValue);
-            totalStrengthText.ScoreShow(GlobalStats.instance.attributes[4].totalValue);
-            totalAttackText.ScoreShow(GlobalStats.instance.attributes[5].totalValue);
-            totalSkillText.ScoreShow(GlobalStats.instance.attributes[6].totalValue);
-            totalCriticalText.ScoreShow(GlobalStats.instance.attributes[7].totalValue);
-            totalSpeedText.ScoreShow(GlobalStats.instance.attributes[8].totalValue);
-            totalLuckText.ScoreShow(GlobalStats.instance.attributes[9].totalValue);
+            totalHealthText.ScoreShow(GlobalStats.instance.Health);
+            totalRegenText.ScoreShow(GlobalStats.instance.Regen);
+            totalDefenseText.ScoreShow(GlobalStats.instance.Defense);
+            totalDodgeText.ScoreShow(GlobalStats.instance.Dogde);
+            totalStrengthText.ScoreShow(GlobalStats.instance.Strength);
+            totalAttackText.ScoreShow(GlobalStats.instance.Attack);
+            totalSkillText.ScoreShow(GlobalStats.instance.Skill);
+            totalCriticalText.ScoreShow(GlobalStats.instance.Critical);
+            totalSpeedText.ScoreShow(GlobalStats.instance.Speed);
+            totalLuckText.ScoreShow(GlobalStats.instance.Luck);
         }
         else if (currentMenuIndex == 2)
         {
-            totalHealthText1.ScoreShow(GlobalStats.instance.attributes[0].totalValue);
-            totalRegenText1.ScoreShow(GlobalStats.instance.attributes[1].totalValue);
-            totalDefenseText1.ScoreShow(GlobalStats.instance.attributes[2].totalValue);
-            totalDodgeText1.ScoreShow(GlobalStats.instance.attributes[3].totalValue);
-            totalStrengthText1.ScoreShow(GlobalStats.instance.attributes[4].totalValue);
-            totalAttackText1.ScoreShow(GlobalStats.instance.attributes[5].totalValue);
-            totalSkillText1.ScoreShow(GlobalStats.instance.attributes[6].totalValue);
-            totalCriticalText1.ScoreShow(GlobalStats.instance.attributes[7].totalValue);
-            totalSpeedText1.ScoreShow(GlobalStats.instance.attributes[8].totalValue);
-            totalLuckText1.ScoreShow(GlobalStats.instance.attributes[9].totalValue);
+            totalHealthText1.ScoreShow(GlobalStats.instance.Health);
+            totalRegenText1.ScoreShow(GlobalStats.instance.Regen);
+            totalDefenseText1.ScoreShow(GlobalStats.instance.Defense);
+            totalDodgeText1.ScoreShow(GlobalStats.instance.Dogde);
+            totalStrengthText1.ScoreShow(GlobalStats.instance.Strength);
+            totalAttackText1.ScoreShow(GlobalStats.instance.Attack);
+            totalSkillText1.ScoreShow(GlobalStats.instance.Skill);
+            totalCriticalText1.ScoreShow(GlobalStats.instance.Critical);
+            totalSpeedText1.ScoreShow(GlobalStats.instance.Speed);
+            totalLuckText1.ScoreShow(GlobalStats.instance.Luck);
         }
 
         

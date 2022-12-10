@@ -31,7 +31,15 @@ public class Bullet : MonoBehaviour
         Target target = collider.gameObject.GetComponent<Target>();
         if(target != null && collider.gameObject.transform != bulletOwner )
         {
-            target.Damage(bulletDamage);
+            if (GlobalStats.instance.Critical > Random.Range(0, 100))
+            {
+                target.Damage(2 * bulletDamage, true);
+            }
+            else
+            {
+                target.Damage(bulletDamage, false);
+            }
+            
             Destroy(gameObject);
             
         }

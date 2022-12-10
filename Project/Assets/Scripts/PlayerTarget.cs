@@ -16,8 +16,8 @@ public class PlayerTarget : MonoBehaviour
     
     private void Start()
     {
-        maxHealth = GlobalStats.instance.attributes[0].totalValue;
-        currentHealth = GlobalStats.instance.attributes[0].totalValue;
+        maxHealth = GlobalStats.instance.Health;
+        currentHealth = GlobalStats.instance.Health;
         GlobalStats.OnStatsChange += RecalulateMaxHP;
     }
 
@@ -78,7 +78,7 @@ public class PlayerTarget : MonoBehaviour
 
     private void RecalulateMaxHP(object sender, EventArgs e)
     {
-        maxHealth = GlobalStats.instance.attributes[0].totalValue;
+        maxHealth = GlobalStats.instance.Health;
         helthBarSlider.transform.localScale = new Vector3(currentHealth / maxHealth, 1);
         Debug.Log("RecalMAx");
     }

@@ -69,16 +69,12 @@ public class WeaponManager : MonoBehaviour
     private void Start()
     {
         reloadSliderValue = new List<float>();
-        //weaponsList = new List<WeaponDataSO>();
         currentMagSizeList = new List<int>();
-        /*currentMagSizeList = new int[weaponsList.Length];
-        currentMagSizeList = new int[]*/
 
 
         
         for (int i = 0; i < weaponsList.Count; i++)
         {
-            //Debug.Log(i);
             currentMagSizeList.Add(weaponsList[i].magSize); 
             reloadSliderValue.Add(weaponsList[i].reloadTime);
             
@@ -159,14 +155,13 @@ public class WeaponManager : MonoBehaviour
         weaponPrefab = weaponsList[currentWeaponIndex].weaponPrefab;
         bulletPrefab = weaponsList[currentWeaponIndex].bulletPrefab;
         bulletDamage = weaponsList[currentWeaponIndex].bulletDamage;
-        fireRate = weaponsList[currentWeaponIndex].fireRate;
+        fireRate = weaponsList[currentWeaponIndex].fireRate; //* (GlobalStats.instance.Skill / 100);
         bulletSpeed = weaponsList[currentWeaponIndex].bulletSpeed;
         magSize = weaponsList[currentWeaponIndex].magSize;
         reloadTime = weaponsList[currentWeaponIndex].reloadTime;
         currentBulletType = weaponsList[currentWeaponIndex].bulletType;
         splashRadius = weaponsList[currentWeaponIndex].splashRadius;
         currentWeaponTransform = Instantiate(weaponPrefab, weaponArm);
-        //currentEndPoint= Instantiate(new GameObject("EndPoint").transform, weaponsList[currentWeaponIndex].gunEndPoint, Quaternion.identity, weaponArm);
         currentEndPoint = Instantiate(emptyPrefab, weaponArm);
         currentEndPoint.localPosition = weaponsList[currentWeaponIndex].gunEndPoint;
         
@@ -297,7 +292,7 @@ public class WeaponManager : MonoBehaviour
             return;
         }
 
-        if (currentMagSizeList[currentWeaponIndex] <= 0)
+        if (currentMagSizeList[currentWeaponIndex] <= 0 && magSize != 0)
         {
             
             StartCoroutine(Reload());
@@ -326,22 +321,31 @@ public class WeaponManager : MonoBehaviour
                 reloadSlider.value--;
                 currentAnimator.SetTrigger("Shoot");
             }*/
+
             HandleAutoAiming();
+
+            var damage = (bulletDamage * GlobalStats.instance.Attack * 0.01f) * (1 + (GlobalStats.instance.Strength * 0.01f));
+
+
             OnShoot?.Invoke(this, new OnShootEventArgs
             {
                 gunEndPointPosition = currentEndPoint.position,
                 aimDirection = aimDirection,
                 bulletPrefab = bulletPrefab,
                 bulletSpeed = bulletSpeed,
-                bulletDamage = bulletDamage,
+                bulletDamage = damage,
                 bulletOwner = transform,
                 bulletType = currentBulletType,
                 splashRadius = splashRadius,
 
             }); ;
             currentCooldown = 1 / (fireRate / 60);
-            currentMagSizeList[currentWeaponIndex]--;
-            reloadSlider.value--;
+            if (magSize != 0)
+            {
+                currentMagSizeList[currentWeaponIndex]--;
+                reloadSlider.value--;
+            }
+           
             currentAnimator.SetTrigger("Shoot");
 
         }
@@ -367,7 +371,6 @@ public class WeaponManager : MonoBehaviour
         reloadSlider.maxValue = magSize;
         reloadSliderImage.color = Color.blue;
         reloadSlider.value = currentMagSizeList[currentWeaponIndex];
-        
         isReloading = false;
 
         
