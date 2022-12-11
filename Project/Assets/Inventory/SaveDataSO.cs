@@ -25,7 +25,7 @@ public class SaveDataSO : ScriptableObject
     }
 
     [ContextMenu("Save")]
-    private void Save()
+    public void Save()
     {
         //string saveData = JsonUtility.ToJson(this, true);
         //BinaryFormatter bf = new BinaryFormatter();

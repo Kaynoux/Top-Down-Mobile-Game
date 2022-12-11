@@ -56,8 +56,7 @@ public class GlobalStats : MonoBehaviour
         }
         else
         {
-            Destroy(instance.gameObject);
-            instance = this;
+            Destroy(this.gameObject);
         }
 
         DontDestroyOnLoad(this.gameObject);

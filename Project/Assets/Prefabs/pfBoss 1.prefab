@@ -109,7 +109,7 @@ Transform:
   m_GameObject: {fileID: 1656325290928407265}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.37, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 188966737362116141}
@@ -308,8 +308,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4440270258176739747}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.042, y: 2.667, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalPosition: {x: -0.038, y: 3.612, z: 0}
+  m_LocalScale: {x: 2.48, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4440270257571070242}
@@ -405,8 +405,7 @@ MonoBehaviour:
   currentHealth: 0
   helthBarSlider: {fileID: 4440270258704702420}
   glowSprite: {fileID: 218198878}
-  visibleHealthBar: 1
-  pfDamagePopup: {fileID: 0}
+  isBoss: 1
 --- !u!210 &2027854804033306396
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -607,7 +606,7 @@ Transform:
   m_GameObject: {fileID: 5498544475109223356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6652153134465923724}

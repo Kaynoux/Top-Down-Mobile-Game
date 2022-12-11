@@ -12,7 +12,7 @@ public class DamagePopup : MonoBehaviour
     {
         Transform damagePopupTransform = Instantiate(GameAssets.i.pfDamagePopup, _pos + new Vector3(0, 0.7f) + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f)), Quaternion.identity);
         DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
-        damagePopup.Setup(_damage, _isCritical, _isPlayerDamage);
+        damagePopup.Setup(Mathf.Floor(_damage), _isCritical, _isPlayerDamage);
         return damagePopup;
     }
     private void Awake()
@@ -26,6 +26,8 @@ public class DamagePopup : MonoBehaviour
         if (_isPlayerDamage)
         {
             textMeshPro.text = (-_damage).ToString();
+            textMeshPro.fontSize *= 1.3f;
+            textMeshPro.color = new Color32(231, 76, 60, 255);
         }
         else
         {
@@ -35,7 +37,7 @@ public class DamagePopup : MonoBehaviour
         if (_isCritical)
         {
             textMeshPro.fontSize *= 1.3f;
-            textMeshPro.color = Color.red;
+            textMeshPro.color = new Color32(230, 126, 34, 255);
         }
         sortingOrder++;
         textMeshPro.sortingOrder = sortingOrder;

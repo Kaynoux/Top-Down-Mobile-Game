@@ -43,7 +43,7 @@ public class PlayerTarget : MonoBehaviour
 
     public void Damage(float _damage)
     {
-        DamagePopup.Create(transform.position, _damage, false, false);
+        DamagePopup.Create(transform.position, _damage, false, true);
         currentHealth -= _damage;
         if (currentHealth <= 0)
         {

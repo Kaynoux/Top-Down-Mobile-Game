@@ -25,6 +25,7 @@ public class MainSpawner : MonoBehaviour
 
     private bool isInBossFight;
     private float currentCooldown;
+    private bool isSpawned;
 
     public static MainSpawner instance;
     private void Awake()
@@ -70,24 +71,27 @@ public class MainSpawner : MonoBehaviour
             return;
         }
 
-        if (time > 300)
+        if (time > 300 && !isSpawned)
         {
             Debug.Log("Summon Boss");
-            isInBossFight = true;
-            SpawnBoss(GetSpawnPosition());
-            while (enemys.Count > 0)
+            isSpawned = true;
+            isPauseSpawning = true;
+            
+            for (int i = 0; i < enemys.Count; i++)
             {
-                Destroy(enemys[0].gameObject);
+                Destroy(enemys[i].gameObject);
             }
+            enemys.Clear();
+            SpawnBoss(GetSpawnPosition());
             return;
 
-            
-            
-
         }
-        time += Time.deltaTime;
 
-
+        if (!isPauseSpawning)
+        {
+            time += Time.deltaTime;
+        }
+        
         if (currentCooldown < 0)
         {
             
@@ -110,29 +114,28 @@ public class MainSpawner : MonoBehaviour
 
     private void SpawnBoss(Vector3 _enemyPosition)
     {
-        var newEnemy = Instantiate(WhichEnemy(), _enemyPosition, Quaternion.identity, enemyHolder);
+        var newEnemy = Instantiate(bossTypes[0].prefab, _enemyPosition, Quaternion.identity, enemyHolder);
         enemys.Add(newEnemy);
     }
 
     private Transform WhichEnemy()
     {
+        List<int> ints = new List<int>();
+
         for (int i = 0; i < enemyTypes.Count; i++)
         {
-            if (enemyTypes[i].canSpawnAfter < time)
+            if (time > enemyTypes[i].canSpawnAfter)
             {
-
-                if (enemyTypes[i].probality > Random.Range(0, 100))
+                for (int ii = 0; ii < enemyTypes[i].spawnWeight; ii++)
                 {
-                    return enemyTypes[i].prefab;
+                    ints.Add(i + 1);
                 }
-            }
-            else
-            {
-                break;
-            }
-            
+            } 
         }
-        return WhichEnemy();
+
+        Debug.Log(string.Join(", ", ints));
+        int randomNumber = ints[Random.Range(0, ints.Count)];
+        return enemyTypes[randomNumber - 1].prefab;
 
         
     }
@@ -152,7 +155,7 @@ public class Enemy
 {
     public Transform prefab;
     public float canSpawnAfter;
-    public float probality;
+    public int spawnWeight;
 }
 
 [System.Serializable]
@@ -160,5 +163,5 @@ public class Boss
 {
     public Transform prefab;
     public float canSpawnAfter;
-    public float probality;
+    public int spawnWeight;
 }

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   savePath: /SaveData.save
   saveClass:
-    totalCoins: 10000
-    totalGems: 101000
+    totalCoins: 0
+    totalGems: 0
     currentHealthLevel: 0
     currentStrengthLevel: 0
     musicVolume: -40
     soundVolume: -40
-    qualityLevelIndex: 2
+    qualityLevelIndex: 0

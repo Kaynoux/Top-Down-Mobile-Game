@@ -2,13 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Runtime.CompilerServices;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
-using System.Linq;
-using Unity.VisualScripting;
-using CodeMonkey.Utils;
-using UnityEditor.Build;
+
 
 public class WeaponManager : MonoBehaviour
 {
@@ -22,14 +17,13 @@ public class WeaponManager : MonoBehaviour
         public float bulletSpeed;
         public float bulletDamage;
         public float splashRadius;
-        public int bulletType;
-
-        
-        
+        public int bulletType; 
     }
+
     public bool keyboardInput = false;
     public bool joystickInput = true;
 
+    private string weaponName;
     public int currentWeaponIndex;
     public int startWeapon;
     public List<WeaponDataSO> weaponsList;
@@ -51,15 +45,12 @@ public class WeaponManager : MonoBehaviour
     private Transform currentEndPoint;
     private Animator currentAnimator;
     private Vector3 aimDirection;
-    private float currentCooldown;
+    private float currentCooldown = 2;
     private bool isReloading;
 
     private List<int> currentMagSizeList;
-    private Transform closestEnemy;
-    private bool isNewTarget;
     private Transform currentTarget;
 
-    private string weaponName;
     private Transform weaponPrefab;
     private Transform bulletPrefab;
     private float bulletDamage;
@@ -94,28 +85,16 @@ public class WeaponManager : MonoBehaviour
     private void Update()
     {
         
-        //Debug.Log(bulletSpeed);
         if(isReloading == true)
         {
             reloadSlider.value = reloadSliderValue[currentWeaponIndex] - Time.deltaTime;
             reloadSliderValue[currentWeaponIndex] -= Time.deltaTime;
         }
 
-        HandleInput()
-        
+        HandleInput();
 
-       
 
-        if (GetClosestEnemy() == null)
-        {
-            HandleAutoAiming(false);
-        }
-        else
-        {
-            HandleAutoAiming(true);
-        }
-
-        
+        HandleAutoAiming();
         HandleShooting();
 
 
@@ -127,7 +106,7 @@ public class WeaponManager : MonoBehaviour
 
     }
 
-    private void SelectWeapon(int weaponIndex)
+    public void SelectWeapon(int weaponIndex)
     {
 
 
@@ -142,7 +121,7 @@ public class WeaponManager : MonoBehaviour
         weaponPrefab = weaponsList[currentWeaponIndex].weaponPrefab;
         bulletPrefab = weaponsList[currentWeaponIndex].bulletPrefab;
         bulletDamage = weaponsList[currentWeaponIndex].bulletDamage;
-        fireRate = weaponsList[currentWeaponIndex].fireRate; //* (GlobalStats.instance.Skill / 100);
+        fireRate = weaponsList[currentWeaponIndex].fireRate * (GlobalStats.instance.Skill / 100);
         bulletSpeed = weaponsList[currentWeaponIndex].bulletSpeed;
         magSize = weaponsList[currentWeaponIndex].magSize;
         reloadTime = weaponsList[currentWeaponIndex].reloadTime;
@@ -176,96 +155,58 @@ public class WeaponManager : MonoBehaviour
 
     }
 
-    private void HandleAiming()
+
+    private void HandleAutoAiming()
     {
-        if (joystickAim.Horizontal != 0 || joystickAim.Vertical != 0 && joystickInput == true)
-        {
-            aimDirection = new Vector3(joystickAim.Horizontal, joystickAim.Vertical);
-            horizontalAim = joystickAim.Horizontal;
-            verticalAim = joystickAim.Vertical;
-        }
-        else if (keyboardInput == true)
-        {
-            aimDirection = UtilsClass.GetMouseWorldPosition() - currentEndPoint.position;
-            horizontalAim = aimDirection.normalized.x;
-            verticalAim = aimDirection.normalized.y;
-        }
-        //Debug.Log(horizontalAim + " " + verticalAim);
-
-        
-
-        angle = -(Mathf.Atan2(horizontalAim, verticalAim) * Mathf.Rad2Deg) + 90;
-
-
-        //weaponArm.eulerAngles = new Vector3(0, 0, angle);
-        if (horizontalAim < 0)
-        {
-            //Debug.Log("1");
-            weaponArm.eulerAngles = new Vector3(-180, 0, -angle);
-            rotator.localEulerAngles = new Vector3(0, -180, 0);
-        }
-        else
-        {
-            //Debug.Log("2");
-            weaponArm.eulerAngles = new Vector3(0, 0, angle);
-            rotator.localEulerAngles = new Vector3(0, 0, 0);
-            //weaponArm.eulerAngles = new Vector3(0, 0, angle);
-        }
-
-        
-
-
-
-
-    }
-
-    private void HandleAutoAiming(bool _targetChange)
-    {
+        GetClosestEnemy();
 
         if (currentTarget == null)
         {
             return;
         }
         
-        aimDirection = closestEnemy.GetChild(0).position - currentEndPoint.position;
+        aimDirection = currentTarget.GetChild(0).position - transform.position;
         angle = -(Mathf.Atan2(aimDirection.normalized.x, aimDirection.normalized.y) * Mathf.Rad2Deg) + 90;
 
-        if (!_targetChange && aimDirection.magnitude > .3f)
+        if (aimDirection.magnitude < .2f)
         {
             return;
         }
 
         if (aimDirection.normalized.x < 0)
         {
-            //Debug.Log("1");
             weaponArm.eulerAngles = new Vector3(-180, 0, -angle);
             rotator.localEulerAngles = new Vector3(0, -180, 0);
         }
         else
         {
-            //Debug.Log("2");
             weaponArm.eulerAngles = new Vector3(0, 0, angle);
             rotator.localEulerAngles = new Vector3(0, 0, 0);
-            //weaponArm.eulerAngles = new Vector3(0, 0, angle);
         }
 
-        aimDirection = closestEnemy.GetChild(0).position - currentEndPoint.position;
+        aimDirection = currentTarget.GetChild(0).position - currentEndPoint.position;
 
     }
 
-    private Transform GetClosestEnemy()
+    private void GetClosestEnemy()
     {
         var enemies = MainSpawner.instance.enemys;
         if (enemies.Count == 0)
         {
-            return null;
+            return;
         }
+
         Transform bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
         foreach (Transform potentialTarget in enemies)
         {
             Vector3 directionToTarget = potentialTarget.position - currentPosition;
+            if (directionToTarget.magnitude > 10)
+            {
+                continue;
+            }    
+
             float dSqrToTarget = directionToTarget.sqrMagnitude + .2f;
             if (dSqrToTarget < closestDistanceSqr)
             {
@@ -273,14 +214,10 @@ public class WeaponManager : MonoBehaviour
                 bestTarget = potentialTarget;
             }
         }
-        if (bestTarget = currentTarget)
-        {
-            return null;
-        }
-        else
+
+        if (bestTarget != currentTarget)
         {
             currentTarget = bestTarget;
-            return bestTarget;
         }
         
     }
@@ -302,28 +239,6 @@ public class WeaponManager : MonoBehaviour
 
         else if (currentCooldown <= 0)
         {
-            /*if ((joystickAim.Horizontal > 0.35 || joystickAim.Vertical > 0.35 || joystickAim.Horizontal < -0.35 || joystickAim.Vertical < -0.35 && joystickInput == true ) || (keyboardInput == true && Input.GetMouseButton(0)))
-            {
-                OnShoot?.Invoke(this, new OnShootEventArgs
-                {
-                    gunEndPointPosition = currentEndPoint.position,
-                    aimDirection = aimDirection,
-                    bulletPrefab = bulletPrefab,
-                    bulletSpeed = bulletSpeed,
-                    bulletDamage = bulletDamage,
-                    bulletOwner = transform,
-                    bulletType = currentBulletType,
-                    splashRadius = splashRadius,
-
-                }); ;
-                currentCooldown = 1 / (fireRate / 60);
-                currentMagSizeList[currentWeaponIndex] --;
-                reloadSlider.value--;
-                currentAnimator.SetTrigger("Shoot");
-            }*/
-
-           
-
             var damage = (bulletDamage * GlobalStats.instance.Attack * 0.01f) * (1 + (GlobalStats.instance.Strength * 0.01f));
 
 

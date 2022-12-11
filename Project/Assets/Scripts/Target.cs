@@ -9,8 +9,7 @@ public class Target : MonoBehaviour
     public float currentHealth;
     public Transform helthBarSlider;
     public SpriteRenderer glowSprite;
-    public bool visibleHealthBar;
-    public Transform pfDamagePopup;
+    public bool isBoss;
 
     private void Start()
     {
@@ -22,12 +21,17 @@ public class Target : MonoBehaviour
         currentHealth -= _damage;
         if(currentHealth <= 0)
         {
-            Destroy(gameObject);
+            if (isBoss)
+            {
+                MainSpawner.instance.isPauseSpawning = false;
+            }
             MainSpawner.instance.enemys.Remove(transform);
+            Destroy(gameObject);
+            
         }
         else
         {
-            if (visibleHealthBar)
+            if (isBoss)
             {
                 helthBarSlider.transform.localScale = new Vector3(currentHealth / maxHealth, 1);
             }
