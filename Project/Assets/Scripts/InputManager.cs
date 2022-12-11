@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour
 
     public delegate void EndTouchDelegate(Vector2 position);
     public event EndTouchDelegate OnEndTouch;
-    
+
     private PlayerControlls playerControlls;
 
     private static InputManager _instance;
@@ -32,10 +32,10 @@ public class InputManager : MonoBehaviour
             _instance = this;
             playerControlls = new PlayerControlls();
         }
-       
-    } 
 
-  
+    }
+
+
 
     private void OnEnable()
     {
@@ -44,7 +44,7 @@ public class InputManager : MonoBehaviour
 
     private void OnDisable()
     {
-        playerControlls.Disable(); 
+        playerControlls.Disable();
     }
 
     private void Start()
@@ -62,9 +62,9 @@ public class InputManager : MonoBehaviour
 
     private void EndTouch(InputAction.CallbackContext context)
     {
-        
+
     }
 
 
-    
+
 }

@@ -18,7 +18,7 @@ public class Target : MonoBehaviour
     }
     public void Damage(float _damage, bool _isCritical)
     {
-        DamagePopup.Create(transform.position, _damage, _isCritical);
+        DamagePopup.Create(transform.position, _damage, _isCritical, false);
         currentHealth -= _damage;
         if(currentHealth <= 0)
         {

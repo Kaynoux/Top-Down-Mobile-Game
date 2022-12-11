@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 5f);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //Debug.Log("Try MOvig" + bulletSpeed);
         transform.position += aimDirection.normalized * bulletSpeed * Time.deltaTime;

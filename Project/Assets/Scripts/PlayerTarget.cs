@@ -41,9 +41,10 @@ public class PlayerTarget : MonoBehaviour
         }    
     }
 
-    public void Damage(float damage)
+    public void Damage(float _damage)
     {
-        currentHealth -= damage;
+        DamagePopup.Create(transform.position, _damage, false, false);
+        currentHealth -= _damage;
         if (currentHealth <= 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 90);

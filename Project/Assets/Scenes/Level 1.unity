@@ -3509,6 +3509,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pfEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4440270258846223768, guid: b9f6c3e2e4193af408fcd0b945c22a70, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4440270258846223771, guid: b9f6c3e2e4193af408fcd0b945c22a70, type: 3}
       propertyPath: maxHealth
       value: 1000000
@@ -12582,12 +12586,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1392626583}
+  - component: {fileID: 1392626585}
   - component: {fileID: 1392626582}
   - component: {fileID: 1392626581}
   - component: {fileID: 1392626580}
   - component: {fileID: 1392626579}
   - component: {fileID: 1392626584}
-  - component: {fileID: 1392626585}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -12709,17 +12713,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f5644b7c7a5fa47be9a4593a10547d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPauseSpawning: 1
-  mainCamera: {fileID: 944897466}
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.023409367
+      value: 3.0224123
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 64.03615
+      value: 6.805315
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.44572714
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 199.08768
+      value: 10.028752
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 600.0296
+      value: 39.949
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15056951
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  isPauseSpawning: 0
+  time: 0
   enemyTypes:
-  - {fileID: 4440270258846223764, guid: b9f6c3e2e4193af408fcd0b945c22a70, type: 3}
+  - prefab: {fileID: 4440270258846223764, guid: b9f6c3e2e4193af408fcd0b945c22a70, type: 3}
+    canSpawnAfter: -1
+    probality: 50
+  - prefab: {fileID: 4440270258846223764, guid: 9549d4d851718684cbc8c3c5fe15b8f6, type: 3}
+    canSpawnAfter: 10
+    probality: 10
+  bossTypes:
+  - prefab: {fileID: 4440270258846223764, guid: cd918546ecf2fad4bb5c87e1d4bffdc1, type: 3}
+    canSpawnAfter: 0
+    probality: 0
+  enemys: []
+  mainCamera: {fileID: 944897466}
   enemyHolder: {fileID: 1389274124}
   minDistance: 15
   maxDistance: 20
   difficulty: 5
   baseSpawnTime: 5
-  enemys:
-  - {fileID: 300557475}
 --- !u!1 &1404543794
 GameObject:
   m_ObjectHideFlags: 0
@@ -20600,7 +20655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attributes:
   - itemAttribute: 0
-    startValue: 100
+    startValue: 200
     baseValue: 0
     totalValue: 0
   - itemAttribute: 1
@@ -20696,7 +20751,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -109.8, y: -105.1}
+  m_AnchoredPosition: {x: -109.80005, y: -105.1001}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1582045575
@@ -21461,7 +21516,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -7.7860107, y: -330.7}
+  m_AnchoredPosition: {x: -7.786133, y: -330.7}
   m_SizeDelta: {x: -1077.106, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1840637614

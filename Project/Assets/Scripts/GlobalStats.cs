@@ -69,7 +69,8 @@ public class GlobalStats : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(LateStart());
+        RecalulateStats();
+        //StartCoroutine(LateStart());
     }
 
     IEnumerator LateStart()

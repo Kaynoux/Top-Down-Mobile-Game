@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using System.Linq;
 using Unity.VisualScripting;
 using CodeMonkey.Utils;
+using UnityEditor.Build;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -54,7 +55,9 @@ public class WeaponManager : MonoBehaviour
     private bool isReloading;
 
     private List<int> currentMagSizeList;
-    
+    private Transform closestEnemy;
+    private bool isNewTarget;
+    private Transform currentTarget;
 
     private string weaponName;
     private Transform weaponPrefab;
@@ -91,7 +94,6 @@ public class WeaponManager : MonoBehaviour
     private void Update()
     {
         
-        HandleShooting();
         //Debug.Log(bulletSpeed);
         if(isReloading == true)
         {
@@ -99,38 +101,23 @@ public class WeaponManager : MonoBehaviour
             reloadSliderValue[currentWeaponIndex] -= Time.deltaTime;
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SelectWeapon(0);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SelectWeapon(1);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SelectWeapon(2);
-        }
-
-        if(Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (keyboardInput == true)
-            {
-                keyboardInput = false;
-                joystickInput = true;
-                joystickAim.gameObject.SetActive(true);
-            }
-
-            else 
-            {
-                keyboardInput = true;
-                joystickInput = false;
-                joystickAim.gameObject.SetActive(false);
-            }
-        }
+        HandleInput()
         
+
+       
+
+        if (GetClosestEnemy() == null)
+        {
+            HandleAutoAiming(false);
+        }
+        else
+        {
+            HandleAutoAiming(true);
+        }
+
+        
+        HandleShooting();
+
 
 
 
@@ -232,18 +219,21 @@ public class WeaponManager : MonoBehaviour
 
     }
 
-    private void HandleAutoAiming()
+    private void HandleAutoAiming(bool _targetChange)
     {
 
-        var closestEnemy = GetClosestEnemy();
-
-        if (closestEnemy == null)
+        if (currentTarget == null)
         {
             return;
         }
-
-        aimDirection = closestEnemy.position - currentEndPoint.position;
+        
+        aimDirection = closestEnemy.GetChild(0).position - currentEndPoint.position;
         angle = -(Mathf.Atan2(aimDirection.normalized.x, aimDirection.normalized.y) * Mathf.Rad2Deg) + 90;
+
+        if (!_targetChange && aimDirection.magnitude > .3f)
+        {
+            return;
+        }
 
         if (aimDirection.normalized.x < 0)
         {
@@ -258,6 +248,8 @@ public class WeaponManager : MonoBehaviour
             rotator.localEulerAngles = new Vector3(0, 0, 0);
             //weaponArm.eulerAngles = new Vector3(0, 0, angle);
         }
+
+        aimDirection = closestEnemy.GetChild(0).position - currentEndPoint.position;
 
     }
 
@@ -274,15 +266,23 @@ public class WeaponManager : MonoBehaviour
         foreach (Transform potentialTarget in enemies)
         {
             Vector3 directionToTarget = potentialTarget.position - currentPosition;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            float dSqrToTarget = directionToTarget.sqrMagnitude + .2f;
             if (dSqrToTarget < closestDistanceSqr)
             {
                 closestDistanceSqr = dSqrToTarget;
                 bestTarget = potentialTarget;
             }
         }
-
-        return bestTarget;
+        if (bestTarget = currentTarget)
+        {
+            return null;
+        }
+        else
+        {
+            currentTarget = bestTarget;
+            return bestTarget;
+        }
+        
     }
 
     private void HandleShooting()
@@ -322,7 +322,7 @@ public class WeaponManager : MonoBehaviour
                 currentAnimator.SetTrigger("Shoot");
             }*/
 
-            HandleAutoAiming();
+           
 
             var damage = (bulletDamage * GlobalStats.instance.Attack * 0.01f) * (1 + (GlobalStats.instance.Strength * 0.01f));
 
@@ -353,7 +353,6 @@ public class WeaponManager : MonoBehaviour
         {
             currentCooldown -= Time.deltaTime;
         }
-        //Debug.Log(currentCooldown);
        
 
     }
@@ -374,6 +373,41 @@ public class WeaponManager : MonoBehaviour
         isReloading = false;
 
         
+    }
+
+    private void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SelectWeapon(0);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SelectWeapon(1);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SelectWeapon(2);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (keyboardInput == true)
+            {
+                keyboardInput = false;
+                joystickInput = true;
+                joystickAim.gameObject.SetActive(true);
+            }
+
+            else
+            {
+                keyboardInput = true;
+                joystickInput = false;
+                joystickAim.gameObject.SetActive(false);
+            }
+        }
     }
 
     

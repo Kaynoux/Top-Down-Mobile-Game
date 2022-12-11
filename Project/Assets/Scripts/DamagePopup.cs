@@ -8,11 +8,11 @@ public class DamagePopup : MonoBehaviour
     private TextMeshPro textMeshPro;
     private float disappearTimer = .5f;
     private static int sortingOrder = 3;
-    public static DamagePopup Create(Vector3 _pos, float _damage, bool _isCritical)
+    public static DamagePopup Create(Vector3 _pos, float _damage, bool _isCritical, bool _isPlayerDamage)
     {
         Transform damagePopupTransform = Instantiate(GameAssets.i.pfDamagePopup, _pos + new Vector3(0, 0.7f) + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f)), Quaternion.identity);
         DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
-        damagePopup.Setup(_damage, _isCritical);
+        damagePopup.Setup(_damage, _isCritical, _isPlayerDamage);
         return damagePopup;
     }
     private void Awake()
@@ -21,9 +21,17 @@ public class DamagePopup : MonoBehaviour
         transform.localScale = new Vector3(.5f, .5f);
     }
 
-    public void Setup(float _damage, bool _isCritical)
+    public void Setup(float _damage, bool _isCritical, bool _isPlayerDamage)
     {
-        textMeshPro.text = _damage.ToString();
+        if (_isPlayerDamage)
+        {
+            textMeshPro.text = (-_damage).ToString();
+        }
+        else
+        {
+            textMeshPro.text = _damage.ToString();
+        }
+       
         if (_isCritical)
         {
             textMeshPro.fontSize *= 1.3f;
